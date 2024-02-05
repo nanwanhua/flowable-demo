@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 111111zyq
+    url: jdbc:mysql://localhost:3306/flowable?serverTimezone=Asia/Shanghai&useSSL=false&nullCatalogMeansCurrent=true
+
+
+flowable:
+  common:
+    database-schema-update: true
+  spring:
+    async-executor-activate: false
+    job-executor-activate: false
+
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml

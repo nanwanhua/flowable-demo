@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowable流程测试</title>
+    <!-- 包含 jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <h1>Flowable流程测试器</h1>
+
+    <!-- 启动流程表单 -->
+    <form id="startProcessForm">
+        <label for="userId">用户ID：</label>
+        <input type="text" id="userId" name="userId" required>
+        <button type="button" onclick="startProcess()">原神启动!!!</button>
+    </form>
+
+    <!-- 显示流程图表单 -->
+    <form id="showDiagramForm">
+        <label for="processId">流程ID：</label>
+        <input type="text" id="processId" name="processId" required>
+        <button type="button" onclick="showDiagram()">显示流程图</button>
+    </form>
+
+    <!-- 流程图像容器 -->
+    <div id="processImageContainer"></div>
+
+    <script>
+        const backendURL = "http://localhost:8080";
+
+        function startProcess() {
+            const userId = $("#userId").val();
+            $.ajax({
+                url: `${backendURL}/startProcess?userId=${userId}`,
+                type: "POST",
+                success: function (processInstanceId) {
+                    alert(`流程已启动，ID为：${processInstanceId}`);
+                },
+                error: function (error) {
+                    alert("启动流程时出错");
+                }
+            });
+        }
+
+        function showDiagram() {
+            const processId = $("#processId").val();
+            const imageUrl = `${backendURL}/pic?processId=${processId}`;
+
+            // 显示流程图像
+            $("#processImageContainer").html(`<img src="${imageUrl}" alt="流程图">`);
+        }
+    </script>
+</body>
+</html>
