@@ -1,0 +1,38 @@
+.form-container {
+  width: 25%;
+  margin: auto;
+}
+
+.navigation-button {
+  margin: 5px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.success-message {
+  background-color: #ffffff;
+  color: #4CAF50;
+  text-align: center;
+  padding: 5px;
+  font-size: 18px;
+  opacity: 1;
+  transition: opacity 3s ease-in-out;
+}
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.result-container {
+  overflow: auto;
+  width: 50%;
+  margin: auto;
+  white-space: pre-wrap; /* 保留换行符 */
+  max-height: 400px; /* 设置最大高度，根据需要调整 */
+  border: 1px solid #ccc; /* 可选：添加边框以增强样式 */
+  padding: 10px; /* 可选：添加内边距以增强样式 */
+}

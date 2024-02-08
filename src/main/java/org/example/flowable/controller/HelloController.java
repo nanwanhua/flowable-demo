@@ -35,9 +35,9 @@ public class HelloController {
     @Resource
     ProcessEngine processEngine;
 
-    private String headman = "8888";
+    private final String headman = "8888";
 
-    private String manage = "9999";
+    private final String manage = "9999";
 
     /**
      * 开启一个请假流程
@@ -71,6 +71,7 @@ public class HelloController {
         if (Objects.isNull(task)) {
             return "流程不存在";
         }
+        log.info("task:{}",task.toString());
         // 通过审核
         HashMap<String, Object> map = new HashMap<>();
         map.put("headman", headman);
@@ -82,19 +83,22 @@ public class HelloController {
      * 获取审批管理列表
      */
     @PostMapping("/list")
-    public String list(String assignee) {
+    public List<String> list(String assignee) {
+        log.info("assignee : {}", assignee);
         List<Task> tasks = taskService.createTaskQuery().taskAssignee(assignee).orderByTaskCreateTime().desc().list();
-        StringBuilder result = new StringBuilder();
+        // List<Task> list = taskService.createTaskQuery().taskCandidateUser(assignee).orderByTaskCreateTime().desc().list();
+        List<String> results = new ArrayList<>();
         for (Task task : tasks) {
-            result.append("processId")
-                    .append(task.getProcessInstanceId())
-                    .append(" taskId: ").append(task.getId())
-                    .append(" name: ").append(task.getName())
-                    .append(" assignee: ").append(task.getAssignee())
-                    .append(" owner: ").append(task.getOwner())
-                    .append("\n");
+            log.info("task ID : {}", task.getId());
+            String result = "processId" +
+                    task.getProcessInstanceId() +
+                    " taskId: " + task.getId() +
+                    " name: " + task.getName() +
+                    " assignee: " + task.getAssignee() +
+                    " owner: " + task.getOwner();
+            results.add(result);
         }
-        return result.toString();
+        return results;
     }
 
     /**

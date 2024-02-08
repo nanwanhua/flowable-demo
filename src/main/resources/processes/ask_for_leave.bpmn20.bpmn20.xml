@@ -6,7 +6,7 @@
       <documentation>员工请假</documentation>
     </userTask>
     <sequenceFlow id="sid-d6418e11-adf5-4beb-81b9-a8c1bff4d541" sourceRef="sid-9349d23d-c95c-4894-b40a-dbecbfe4bd19" targetRef="sid-f504bec9-fc27-4201-9e63-190eecbf37db"/>
-    <userTask id="sid-6963d7e1-6d51-49b6-92cf-8d623eb46115" name="组长审批" flowable:candidateUsers="#{headman}">
+    <userTask id="sid-6963d7e1-6d51-49b6-92cf-8d623eb46115" name="组长审批" flowable:assignee="#{headman}">
       <documentation>组长审批</documentation>
     </userTask>
     <sequenceFlow id="sid-e7bf361b-33da-42fc-96bf-71bd6bf4f5f2" sourceRef="sid-f504bec9-fc27-4201-9e63-190eecbf37db" targetRef="sid-6963d7e1-6d51-49b6-92cf-8d623eb46115"/>
@@ -18,7 +18,7 @@
     <sequenceFlow id="sid-bd56fae0-98f2-4285-9781-3dbde0fe74ac" sourceRef="sid-aadcfd2c-e9df-45c2-9bf4-e79c90ea93ad" targetRef="sid-5bbd93d0-ee94-4246-9799-fe7357f11f7e" name="组长审批通过">
       <conditionExpression xsi:type="tFormalExpression">${audit=='通过'}</conditionExpression>
     </sequenceFlow>
-    <serviceTask id="sid-55e44db0-968d-4a17-9be6-b9232b229ea3" flowable:exclusive="true" name="发送失败提示" isForCompensation="true" flowable:class="org.example.flowable.bpmn.service">
+    <serviceTask id="sid-55e44db0-968d-4a17-9be6-b9232b229ea3" flowable:exclusive="true" name="发送失败提示" isForCompensation="true" flowable:class="org.example.flowable.bpmn.service.LeaveFailService">
       <documentation>发送失败提示</documentation>
     </serviceTask>
     <sequenceFlow id="sid-ccf87760-3a7c-4792-a24c-d3f491778f4a" sourceRef="sid-aadcfd2c-e9df-45c2-9bf4-e79c90ea93ad" targetRef="sid-55e44db0-968d-4a17-9be6-b9232b229ea3" name="拒绝">
