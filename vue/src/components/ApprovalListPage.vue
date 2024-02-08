@@ -36,6 +36,7 @@ export default {
 </script>
 
 <template>
+  <h2>获取审批管理列表表单</h2>
   <!-- 获取审批管理列表表单 -->
   <div class="form-container">
     <el-form :model="listForm" label-width="80px">
@@ -75,11 +76,3 @@ export default {
 <!--  </el-drawer>-->
 
 </template>
-
-<style scoped>
-
-
-
-
-
-</style>

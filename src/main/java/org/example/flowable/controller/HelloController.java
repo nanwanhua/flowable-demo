@@ -71,7 +71,7 @@ public class HelloController {
         if (Objects.isNull(task)) {
             return "流程不存在";
         }
-        log.info("task:{}",task.toString());
+        log.info("task:{}", task.toString());
         // 通过审核
         HashMap<String, Object> map = new HashMap<>();
         map.put("headman", headman);
@@ -90,7 +90,7 @@ public class HelloController {
         List<String> results = new ArrayList<>();
         for (Task task : tasks) {
             log.info("task ID : {}", task.getId());
-            String result = "processId" +
+            String result = "processId: " +
                     task.getProcessInstanceId() +
                     " taskId: " + task.getId() +
                     " name: " + task.getName() +
@@ -103,6 +103,7 @@ public class HelloController {
 
     /**
      * 查看当前流程进度
+     *
      * @param processId 流程 id
      */
     @GetMapping("/pic")
@@ -158,5 +159,31 @@ public class HelloController {
             }
             log.info("获取流程图 OK!");
         }
+    }
+
+    @PostMapping("/leaderApply")
+    public String leaderApply(@RequestBody Map<String, String> s) {
+        String audit = s.get("audit");
+        String taskId = s.get("taskId");
+        Task task = taskService.createTaskQuery().taskAssignee(headman).taskId(taskId).singleResult();
+        if (Objects.isNull(task)) {
+            task = taskService.createTaskQuery().taskId(taskId).singleResult();
+        }
+        if (Objects.isNull(task)) {
+            return "流程不存在";
+        }
+
+        // 通过审核
+        HashMap<String, Object> map = new HashMap<>();
+        if ("拒绝".equals(audit)) {
+            map.put("rejectReason", "拒绝111");
+            map.put("audit", audit);
+            taskService.complete(task.getId(), map);
+            return "拒绝";
+        }
+        map.put("audit", audit);
+        map.put("manager", manage);
+        taskService.complete(task.getId(), map);
+        return "processed OK!";
     }
 }

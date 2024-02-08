@@ -11,6 +11,7 @@ public class LeaveFailService implements JavaDelegate {
     public void execute(DelegateExecution execution) {
         String name = execution.getVariable("name").toString();
         String rejectReason = execution.getVariable("rejectReason").toString();
-        System.out.println(name+"你的请假申请被驳回了,原因是："+rejectReason);
+        String rejectMessage = name + "你的请假申请被驳回了,原因是：" + rejectReason;
+        execution.setVariable("rejectMessage",rejectMessage);
     }
 }

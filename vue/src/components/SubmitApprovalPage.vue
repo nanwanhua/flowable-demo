@@ -45,7 +45,7 @@ export default {
 
 <template>
   <div class="form-container">
-    <dev class="form-container">
+      <h2>提交审批表单</h2>
       <!-- 提交审批表单 -->
       <el-form :model="submitForm" label-width="80px">
         <el-form-item label="用户ID">
@@ -58,7 +58,6 @@ export default {
           <el-button @click="submit">提交审批</el-button>
         </el-form-item>
       </el-form>
-    </dev>
 
     <!-- 成功提交提示-->
     <div class="success-message" v-show="successMessageVisible">
