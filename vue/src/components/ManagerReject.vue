@@ -37,7 +37,10 @@ export default {
     <h2>经理审核</h2>
     <el-form :modle="leaderApplyForm" label-width="80px">
       <el-form-item label="通过/拒绝">
-        <el-input v-model="leaderApplyForm.audit"></el-input>
+        <el-select v-model="leaderApplyForm.audit" placeholder="请选择">
+          <el-option label="通过" value="通过"></el-option>
+          <el-option label="拒绝" value="拒绝"></el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="taskId">
         <el-input v-model="leaderApplyForm.taskId"></el-input>
