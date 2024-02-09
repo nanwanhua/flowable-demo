@@ -12,7 +12,7 @@
     <sequenceFlow id="sid-e7bf361b-33da-42fc-96bf-71bd6bf4f5f2" sourceRef="sid-f504bec9-fc27-4201-9e63-190eecbf37db" targetRef="sid-6963d7e1-6d51-49b6-92cf-8d623eb46115"/>
     <exclusiveGateway id="sid-aadcfd2c-e9df-45c2-9bf4-e79c90ea93ad" name="组长审批网关"/>
     <sequenceFlow id="sid-71ff48f5-82e9-4b04-b3a2-f0c056c40310" sourceRef="sid-6963d7e1-6d51-49b6-92cf-8d623eb46115" targetRef="sid-aadcfd2c-e9df-45c2-9bf4-e79c90ea93ad"/>
-    <userTask id="sid-5bbd93d0-ee94-4246-9799-fe7357f11f7e" name="经理审批" flowable:assignee="#{manager}">
+    <userTask id="sid-5bbd93d0-ee94-4246-9799-fe7357f11f7e" name="经理审批" flowable:assignee="#{manage}">
       <documentation>经理审批</documentation>
     </userTask>
     <sequenceFlow id="sid-bd56fae0-98f2-4285-9781-3dbde0fe74ac" sourceRef="sid-aadcfd2c-e9df-45c2-9bf4-e79c90ea93ad" targetRef="sid-5bbd93d0-ee94-4246-9799-fe7357f11f7e" name="组长审批通过">

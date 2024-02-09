@@ -76,7 +76,7 @@ public class HelloController {
         HashMap<String, Object> map = new HashMap<>();
         map.put("headman", headman);
         taskService.complete(task.getId(), map);
-        return "processed OK!";
+        return "提交成功!";
     }
 
     /**
@@ -161,14 +161,18 @@ public class HelloController {
         }
     }
 
+    /**
+     * 组长审批
+     * @param s audit ： 通过/拒绝 、 taskId ： taskId
+     */
     @PostMapping("/leaderApply")
     public String leaderApply(@RequestBody Map<String, String> s) {
-        String audit = s.get("audit");
-        String taskId = s.get("taskId");
+        String audit = s.get("audit").trim();
+        String taskId = s.get("taskId").trim();
         Task task = taskService.createTaskQuery().taskAssignee(headman).taskId(taskId).singleResult();
-        if (Objects.isNull(task)) {
-            task = taskService.createTaskQuery().taskId(taskId).singleResult();
-        }
+        // if (Objects.isNull(task)) {
+        //     task = taskService.createTaskQuery().taskId(taskId).singleResult();
+        // }
         if (Objects.isNull(task)) {
             return "流程不存在";
         }
@@ -182,8 +186,28 @@ public class HelloController {
             return "拒绝";
         }
         map.put("audit", audit);
-        map.put("manager", manage);
+        map.put("manage", manage);
         taskService.complete(task.getId(), map);
-        return "processed OK!";
+        return "通过!";
+    }
+
+    @PostMapping("/managerReject")
+    public String manageReject(@RequestBody Map<String,String> s) {
+        String audit = s.get("audit").trim();
+        String taskId = s.get("taskId").trim();
+        Task task = taskService.createTaskQuery().taskAssignee(manage).taskId(taskId).singleResult();
+        if (Objects.isNull(task)) {
+            return "流程不存在";
+        }
+        HashMap<String,Object> map = new HashMap<>();
+        if ("拒绝".equals(audit)) {
+            map.put("rejectReason", "理由不充分");
+            map.put("audit", audit);
+            taskService.complete(task.getId(), map);
+            return "!!!";
+        }
+        map.put("audit", audit);
+        taskService.complete(task.getId(), map);
+        return "通过!";
     }
 }

@@ -1,5 +1,11 @@
+/*.form-container {*/
+/*  width: 25%;*/
+/*  margin: auto;*/
+/*}*/
+
 .form-container {
-  width: 25%;
+  width: 100%;
+  max-width: 25%; /* 设置最大宽度，根据需要调整 */
   margin: auto;
 }
 
